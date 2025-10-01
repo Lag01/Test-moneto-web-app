@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { useAppStore } from '@/store';
 import LayoutWithNav from '@/app/layout-with-nav';
 import SankeyChart from '@/components/SankeyChart';
-import WaterfallChart from '@/components/WaterfallChart';
 import { getPlanSummary } from '@/lib/monthly-plan';
 import { formatCurrency } from '@/lib/financial';
 
@@ -176,9 +175,8 @@ export default function VisualisationPage() {
             </div>
           </div>
 
-          {/* Graphiques */}
+          {/* Graphique Sankey */}
           <div className="space-y-8">
-            <WaterfallChart plan={currentPlan} />
             <SankeyChart plan={currentPlan} />
           </div>
 
