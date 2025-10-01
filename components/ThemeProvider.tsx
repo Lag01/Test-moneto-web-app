@@ -23,7 +23,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || typeof window === 'undefined') return;
 
     const root = window.document.documentElement;
     const theme = userSettings.theme;
@@ -78,8 +78,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 export function useTheme() {
   const context = useContext(ThemeContext);
+  // Pendant le SSR ou si le provider n'est pas disponible, retourner des valeurs par défaut
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    return {
+      theme: 'system' as Theme,
+      setTheme: () => {},
+      resolvedTheme: 'light' as 'light' | 'dark',
+    };
   }
   return context;
 }

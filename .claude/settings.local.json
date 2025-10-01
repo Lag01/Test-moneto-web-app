@@ -8,7 +8,10 @@
       "Bash(del page.tsx)",
       "Bash(ren:*)",
       "Bash(move \"C:\\Users\\lumin\\Documents\\Code\\Test moneto web app\\app\\page.tsx\" \"C:\\Users\\lumin\\Documents\\Code\\Test moneto web app\\app\\home\\page.tsx\")",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npm view:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [],
     "ask": []

@@ -150,9 +150,13 @@ const defaultUserSettings: UserSettings = {
 
 /**
  * Configuration du stockage avec localforage
+ * Utilise localStorage comme fallback côté serveur
  */
 const customStorage = {
   getItem: async (name: string) => {
+    // Côté serveur, retourner null
+    if (typeof window === 'undefined') return null;
+
     try {
       const value = await localforage.getItem<string>(name);
       return value || null;
@@ -162,6 +166,9 @@ const customStorage = {
     }
   },
   setItem: async (name: string, value: string) => {
+    // Côté serveur, ne rien faire
+    if (typeof window === 'undefined') return;
+
     try {
       await localforage.setItem(name, value);
     } catch (error) {
@@ -169,6 +176,9 @@ const customStorage = {
     }
   },
   removeItem: async (name: string) => {
+    // Côté serveur, ne rien faire
+    if (typeof window === 'undefined') return;
+
     try {
       await localforage.removeItem(name);
     } catch (error) {
