@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function PresentationPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-24 bg-gradient-to-br from-emerald-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+    <main className="flex min-h-screen flex-col items-center justify-center px-8 md:px-24 pt-8 md:pt-24 pb-4 md:pb-8 bg-gradient-to-br from-emerald-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
       <div className="max-w-5xl w-full">
         {/* En-tête principale */}
         <div className="text-center mb-16">
@@ -229,7 +229,7 @@ export default function PresentationPage() {
         </div>
 
         {/* Créateur */}
-        <div className="text-center pt-8 border-t border-slate-200 dark:border-slate-700">
+        <div className="text-center pt-6 pb-0 border-t border-slate-200 dark:border-slate-700">
           <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
             Application créée par
           </p>
