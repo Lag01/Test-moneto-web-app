@@ -37,12 +37,12 @@ export default function TutorialWelcomeModal({
             className="fixed inset-0 z-[10000] flex items-center justify-center p-4 pointer-events-none"
           >
             <div
-              className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-lg w-full p-6 md:p-8 pointer-events-auto border-2 border-emerald-400 dark:border-emerald-500"
+              className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-4 md:p-8 pointer-events-auto border-2 border-emerald-400 dark:border-emerald-500"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Icône de bienvenue avec animation */}
               <motion.div
-                className="flex justify-center mb-6"
+                className="flex justify-center mb-4 md:mb-6"
                 animate={{
                   scale: [1, 1.1, 1],
                   rotate: [0, 10, -10, 0],
@@ -53,9 +53,9 @@ export default function TutorialWelcomeModal({
                   ease: 'easeInOut',
                 }}
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
                   <svg
-                    className="w-10 h-10 text-white"
+                    className="w-8 h-8 md:w-10 md:h-10 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -71,25 +71,25 @@ export default function TutorialWelcomeModal({
               </motion.div>
 
               {/* Titre */}
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 text-center mb-4">
+              <h2 className="text-xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 text-center mb-3 md:mb-4">
                 Bienvenue dans Moneto ! 🎉
               </h2>
 
               {/* Description */}
-              <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 text-center mb-6 leading-relaxed">
+              <p className="text-sm md:text-lg text-slate-600 dark:text-slate-300 text-center mb-4 md:mb-6 leading-relaxed">
                 C&apos;est votre première fois ici. Voulez-vous suivre un tutoriel rapide pour
                 découvrir comment utiliser l&apos;application ?
               </p>
 
               {/* Liste des bénéfices */}
-              <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-4 mb-6 border border-emerald-200 dark:border-emerald-800">
-                <p className="text-sm md:text-base font-semibold text-emerald-800 dark:text-emerald-300 mb-3">
+              <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-3 md:p-4 mb-4 md:mb-6 border border-emerald-200 dark:border-emerald-800">
+                <p className="text-xs md:text-base font-semibold text-emerald-800 dark:text-emerald-300 mb-2 md:mb-3">
                   Le tutoriel vous montrera :
                 </p>
-                <ul className="space-y-2 text-sm md:text-base text-slate-700 dark:text-slate-300">
-                  <li className="flex items-start gap-2">
+                <ul className="space-y-1.5 md:space-y-2 text-xs md:text-base text-slate-700 dark:text-slate-300">
+                  <li className="flex items-start gap-1.5 md:gap-2">
                     <svg
-                      className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"
+                      className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -103,9 +103,9 @@ export default function TutorialWelcomeModal({
                     </svg>
                     <span>Comment créer et gérer vos plans mensuels</span>
                   </li>
-                  <li className="flex items-start gap-2">
+                  <li className="flex items-start gap-1.5 md:gap-2">
                     <svg
-                      className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"
+                      className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -119,9 +119,9 @@ export default function TutorialWelcomeModal({
                     </svg>
                     <span>Comment définir vos revenus et dépenses fixes</span>
                   </li>
-                  <li className="flex items-start gap-2">
+                  <li className="flex items-start gap-1.5 md:gap-2">
                     <svg
-                      className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"
+                      className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -135,9 +135,9 @@ export default function TutorialWelcomeModal({
                     </svg>
                     <span>Comment répartir votre budget en enveloppes</span>
                   </li>
-                  <li className="flex items-start gap-2">
+                  <li className="flex items-start gap-1.5 md:gap-2">
                     <svg
-                      className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"
+                      className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -154,7 +154,7 @@ export default function TutorialWelcomeModal({
                 </ul>
               </div>
 
-              <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 text-center mb-6">
+              <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 text-center mb-4 md:mb-6">
                 ⏱️ Le tutoriel prend environ 2-3 minutes
               </p>
 

@@ -25,8 +25,12 @@ export default function TutorialBanner() {
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      animate={{
+        y: isExpanded ? 0 : 'calc(100% - 24px)',
+        opacity: 1
+      }}
       exit={{ y: 100, opacity: 0 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-800 border-t-4 border-emerald-400 dark:border-emerald-500 shadow-2xl md:hidden"
     >
       {/* Barre de progression en haut du bandeau */}
@@ -39,8 +43,11 @@ export default function TutorialBanner() {
         />
       </div>
 
-      {/* En-tête avec bouton expand/collapse */}
-      <div className="px-4 py-2 flex items-center justify-between bg-gradient-to-r from-emerald-500/10 to-blue-500/10 dark:from-emerald-500/5 dark:to-blue-500/5">
+      {/* En-tête avec bouton expand/collapse - cliquable pour expand/collapse */}
+      <div
+        className="px-4 py-2 flex items-center justify-between bg-gradient-to-r from-emerald-500/10 to-blue-500/10 dark:from-emerald-500/5 dark:to-blue-500/5 cursor-pointer active:bg-emerald-500/20 dark:active:bg-emerald-500/10 transition-colors"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full flex items-center justify-center">
             <svg
@@ -66,7 +73,10 @@ export default function TutorialBanner() {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsExpanded(!isExpanded);
+            }}
             className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
             aria-label={isExpanded ? 'Réduire' : 'Agrandir'}
           >
@@ -87,7 +97,10 @@ export default function TutorialBanner() {
             </svg>
           </button>
           <button
-            onClick={quitTutorial}
+            onClick={(e) => {
+              e.stopPropagation();
+              quitTutorial();
+            }}
             className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
             aria-label="Quitter le tutoriel"
           >

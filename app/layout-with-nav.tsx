@@ -15,7 +15,7 @@ export default function LayoutWithNav({
       <MobileNav />
 
       {/* Main content - margin pour desktop, padding-top pour mobile */}
-      <main className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-14 md:pt-0 md:ml-64">
+      <main className="h-screen overflow-y-auto bg-slate-50 dark:bg-slate-900 pt-14 pb-20 md:pt-0 md:pb-0 md:ml-64">
         {children}
       </main>
     </div>
