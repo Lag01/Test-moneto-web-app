@@ -211,25 +211,9 @@ export default function DashboardPage() {
                   <h3 className="text-sm md:text-base font-bold text-red-800 dark:text-red-300 mb-2">
                     Application en phase de test
                   </h3>
-                  <p className="text-xs md:text-sm text-red-700 dark:text-red-300 leading-relaxed mb-3">
+                  <p className="text-xs md:text-sm text-red-700 dark:text-red-300 leading-relaxed">
                     L&apos;application est pour le moment en phase de test et subit souvent des mises à jour. Il se peut alors que vos données soient supprimées la prochaine fois que vous vous connecterez. Nous vous conseillons alors d&apos;exporter vos données afin de les réimporter plus tard si besoin.
                   </p>
-                  {monthlyPlans.length > 0 && (
-                    <button
-                      onClick={handleExportAll}
-                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2 text-xs md:text-sm min-h-[44px]"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                        />
-                      </svg>
-                      Exporter toutes mes données
-                    </button>
-                  )}
                 </div>
                 <button
                   onClick={handleDismissBetaWarning}
