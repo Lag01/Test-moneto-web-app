@@ -70,6 +70,7 @@ export interface MonthlyPlan {
   calculatedResults: CalculatedResults;
   createdAt: string;
   updatedAt: string;
+  isTutorial?: boolean; // Indique si c'est un plan d'exemple pour le tutoriel
 }
 
 /**
@@ -81,6 +82,8 @@ export interface UserSettings {
   locale: string; // fr-FR, en-US, etc.
   autoAdjustPercentages: boolean; // Ajuster auto à 100% ou erreur
   theme: 'light' | 'dark' | 'system'; // Thème de l'application
+  hasSeenTutorial: boolean; // L'utilisateur a-t-il déjà vu le tutoriel ?
+  tutorialCompleted: boolean; // L'utilisateur a-t-il complété le tutoriel ?
 }
 
 /**
@@ -147,6 +150,8 @@ const defaultUserSettings: UserSettings = {
   locale: 'fr-FR',
   autoAdjustPercentages: true,
   theme: 'system',
+  hasSeenTutorial: false,
+  tutorialCompleted: false,
 };
 
 /**

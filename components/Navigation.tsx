@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
+import TutorialSidebar from './tutorial/TutorialSidebar';
+import { useTutorialContext } from '@/context/TutorialContext';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard' },
@@ -13,50 +15,59 @@ const navItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
+  const { isActive: isTutorialActive } = useTutorialContext();
 
   return (
-    <nav className="hidden md:flex bg-slate-800 dark:bg-slate-950 text-white w-64 min-h-screen p-6 flex-col fixed left-0 top-0 bottom-0 z-30">
+    <nav className="hidden md:flex bg-slate-800 dark:bg-slate-950 text-white w-64 min-h-screen p-6 flex-col fixed left-0 top-0 bottom-0 z-30 overflow-y-auto">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-emerald-400 dark:text-emerald-300">Moneto</h1>
         <p className="text-sm text-slate-400 dark:text-slate-500 mt-1">Gestion financière</p>
       </div>
 
-      <ul className="space-y-2 flex-1">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <li key={item.href}>
+      {/* Panneau de tutoriel en overlay full-size (masque tout quand actif) */}
+      <TutorialSidebar />
+
+      {/* Navigation normale - cachée pendant le tutoriel */}
+      {!isTutorialActive && (
+        <>
+          <ul className="space-y-2 flex-1">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={`block px-4 py-3 rounded-lg transition-colors ${
+                      isActive
+                        ? 'bg-emerald-600 dark:bg-emerald-700 text-white font-medium'
+                        : 'text-slate-300 dark:text-slate-400 hover:bg-slate-700 dark:hover:bg-slate-800 hover:text-white'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="space-y-4">
+            {/* Theme Toggle */}
+            <div className="px-2">
+              <ThemeToggle />
+            </div>
+
+            {/* Retour accueil */}
+            <div className="pt-4 border-t border-slate-700 dark:border-slate-800">
               <Link
-                href={item.href}
-                className={`block px-4 py-3 rounded-lg transition-colors ${
-                  isActive
-                    ? 'bg-emerald-600 dark:bg-emerald-700 text-white font-medium'
-                    : 'text-slate-300 dark:text-slate-400 hover:bg-slate-700 dark:hover:bg-slate-800 hover:text-white'
-                }`}
+                href="/"
+                className="block px-4 py-2 text-sm text-slate-400 dark:text-slate-500 hover:text-white transition-colors"
               >
-                {item.label}
+                ← Retour à l&apos;accueil
               </Link>
-            </li>
-          );
-        })}
-      </ul>
-
-      <div className="space-y-4">
-        {/* Theme Toggle */}
-        <div className="px-2">
-          <ThemeToggle />
-        </div>
-
-        {/* Retour accueil */}
-        <div className="pt-4 border-t border-slate-700 dark:border-slate-800">
-          <Link
-            href="/"
-            className="block px-4 py-2 text-sm text-slate-400 dark:text-slate-500 hover:text-white transition-colors"
-          >
-            ← Retour à l&apos;accueil
-          </Link>
-        </div>
-      </div>
+            </div>
+          </div>
+        </>
+      )}
     </nav>
   );
 }

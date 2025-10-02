@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { TutorialProvider } from "@/context/TutorialContext";
+import TutorialOverlay from "@/components/tutorial/TutorialOverlay";
 
 export const metadata: Metadata = {
   title: "Moneto - Gestion financière",
@@ -43,7 +45,10 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <ThemeProvider>
-          {children}
+          <TutorialProvider>
+            {children}
+            <TutorialOverlay />
+          </TutorialProvider>
         </ThemeProvider>
       </body>
     </html>

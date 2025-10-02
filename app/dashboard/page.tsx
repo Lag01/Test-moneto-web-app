@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useAppStore } from '@/store';
 import LayoutWithNav from '@/app/layout-with-nav';
 import { formatDate } from '@/lib/financial';
@@ -12,6 +12,9 @@ import {
   exportAllPlansToJSON,
   importMonthlyPlanFromJSON,
 } from '@/lib/export-import';
+import { useTutorialContext } from '@/context/TutorialContext';
+import { useTutorial } from '@/hooks/useTutorial';
+import TutorialWelcomeModal from '@/components/tutorial/TutorialWelcomeModal';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -22,12 +25,35 @@ export default function DashboardPage() {
     setCurrentMonth,
     deleteMonthlyPlan,
     importMonthlyPlanFromData,
+    userSettings,
+    updateUserSettings,
   } = useAppStore();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importError, setImportError] = useState<string | null>(null);
   const [importSuccess, setImportSuccess] = useState<string | null>(null);
   const [showCopyModal, setShowCopyModal] = useState(false);
+
+  // Tutoriel
+  const { showWelcomeModal, setShowWelcomeModal, startTutorial } = useTutorialContext();
+  const { initializeTutorial } = useTutorial();
+
+  // Afficher la modal de bienvenue si l'utilisateur n'a jamais vu le tutoriel et n'a aucun plan
+  useEffect(() => {
+    if (!userSettings.hasSeenTutorial && monthlyPlans.length === 0) {
+      setShowWelcomeModal(true);
+    }
+  }, [userSettings.hasSeenTutorial, monthlyPlans.length, setShowWelcomeModal]);
+
+  const handleAcceptTutorial = () => {
+    initializeTutorial();
+    startTutorial();
+  };
+
+  const handleDeclineTutorial = () => {
+    updateUserSettings({ hasSeenTutorial: true });
+    setShowWelcomeModal(false);
+  };
 
   const handleCreateNew = () => {
     const now = new Date();
@@ -138,6 +164,13 @@ export default function DashboardPage() {
 
   return (
     <LayoutWithNav>
+      {/* Modal de bienvenue du tutoriel */}
+      <TutorialWelcomeModal
+        isOpen={showWelcomeModal}
+        onAccept={handleAcceptTutorial}
+        onDecline={handleDeclineTutorial}
+      />
+
       <div className="p-4 md:p-8">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">Dashboard</h1>
