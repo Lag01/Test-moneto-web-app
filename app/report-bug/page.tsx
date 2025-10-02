@@ -100,7 +100,7 @@ export default function ReportBugPage() {
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
 
           <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3">
