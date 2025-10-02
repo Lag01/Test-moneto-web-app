@@ -15,6 +15,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Logger les informations du signalement
+    console.log('=== NOUVEAU SIGNALEMENT DE BUG ===');
+    console.log('Nom:', name || 'Non renseigné');
+    console.log('Email:', email);
+    console.log('Sujet:', subject);
+    console.log('Description:', description);
+    console.log('User Agent:', userAgent);
+    console.log('URL:', url);
+    console.log('=================================');
+
     // Envoyer l'email via Resend
     const data = await resend.emails.send({
       from: 'Moneto Bug Report <onboarding@resend.dev>', // Adresse d'envoi vérifiée
@@ -45,6 +55,7 @@ export async function POST(request: NextRequest) {
       `,
     });
 
+    console.log('Réponse Resend:', JSON.stringify(data, null, 2));
     return NextResponse.json({ success: true, data }, { status: 200 });
   } catch (error) {
     console.error('Erreur lors de l\'envoi de l\'email:', error);
