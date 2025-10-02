@@ -33,6 +33,7 @@ export default function DashboardPage() {
   const [importError, setImportError] = useState<string | null>(null);
   const [importSuccess, setImportSuccess] = useState<string | null>(null);
   const [showCopyModal, setShowCopyModal] = useState(false);
+  const [showBetaWarning, setShowBetaWarning] = useState(true);
 
   // Tutoriel
   const { showWelcomeModal, setShowWelcomeModal, startTutorial } = useTutorialContext();
@@ -44,6 +45,19 @@ export default function DashboardPage() {
       setShowWelcomeModal(true);
     }
   }, [userSettings.hasSeenTutorial, monthlyPlans.length, setShowWelcomeModal]);
+
+  // Vérifier si le bandeau de beta a été fermé
+  useEffect(() => {
+    const dismissed = localStorage.getItem('betaWarningDismissed');
+    if (dismissed === 'true') {
+      setShowBetaWarning(false);
+    }
+  }, []);
+
+  const handleDismissBetaWarning = () => {
+    localStorage.setItem('betaWarningDismissed', 'true');
+    setShowBetaWarning(false);
+  };
 
   const handleAcceptTutorial = () => {
     initializeTutorial();
@@ -177,6 +191,68 @@ export default function DashboardPage() {
           <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 mb-6 md:mb-8">
             Gérez vos plans mensuels et consultez votre historique financier
           </p>
+
+          {/* Bandeau d'avertissement beta */}
+          {showBetaWarning && (
+            <div className="mb-4 md:mb-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 md:p-5 rounded-r-lg">
+              <div className="flex items-start gap-3">
+                <svg
+                  className="h-6 w-6 text-red-500 flex-shrink-0 mt-0.5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <div className="flex-1">
+                  <h3 className="text-sm md:text-base font-bold text-red-800 dark:text-red-300 mb-2">
+                    Application en phase de test
+                  </h3>
+                  <p className="text-xs md:text-sm text-red-700 dark:text-red-300 leading-relaxed mb-3">
+                    L&apos;application est pour le moment en phase de test et subit souvent des mises à jour. Il se peut alors que vos données soient supprimées la prochaine fois que vous vous connecterez. Nous vous conseillons alors d&apos;exporter vos données afin de les réimporter plus tard si besoin.
+                  </p>
+                  {monthlyPlans.length > 0 && (
+                    <button
+                      onClick={handleExportAll}
+                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2 text-xs md:text-sm min-h-[44px]"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                        />
+                      </svg>
+                      Exporter toutes mes données
+                    </button>
+                  )}
+                </div>
+                <button
+                  onClick={handleDismissBetaWarning}
+                  className="p-1.5 hover:bg-red-100 dark:hover:bg-red-900/40 rounded-lg transition-colors flex-shrink-0"
+                  aria-label="Fermer"
+                >
+                  <svg
+                    className="w-5 h-5 text-red-600 dark:text-red-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Messages d'erreur/succès import */}
           {importError && (
