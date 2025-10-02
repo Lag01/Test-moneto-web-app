@@ -203,7 +203,7 @@ export default function PresentationPage() {
         </div>
 
         {/* Call to action */}
-        <div className="text-center">
+        <div className="text-center mb-12">
           <Link
             href="/home"
             className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105"
@@ -225,6 +225,16 @@ export default function PresentationPage() {
           </Link>
           <p className="text-slate-500 dark:text-slate-400 mt-4 text-sm">
             Gratuit • Sans inscription • Données privées
+          </p>
+        </div>
+
+        {/* Créateur */}
+        <div className="text-center pt-8 border-t border-slate-200 dark:border-slate-700">
+          <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
+            Application créée par
+          </p>
+          <p className="text-lg font-semibold text-slate-800 dark:text-slate-200">
+            Erwan GUEZINGAR
           </p>
         </div>
       </div>
