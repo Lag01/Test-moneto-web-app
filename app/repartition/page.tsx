@@ -61,17 +61,17 @@ export default function RepartitionPage() {
   if (!currentPlan) {
     return (
       <LayoutWithNav>
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-2xl font-bold text-slate-800 mb-4">
+            <h1 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
               Aucun plan sélectionné
             </h1>
-            <p className="text-slate-600 mb-6">
+            <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 mb-6">
               Veuillez créer ou sélectionner un plan depuis le dashboard
             </p>
             <button
               onClick={() => router.push('/dashboard')}
-              className="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+              className="px-4 md:px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 min-h-[44px] text-sm md:text-base"
             >
               Retour au dashboard
             </button>
@@ -115,22 +115,22 @@ export default function RepartitionPage() {
 
   return (
     <LayoutWithNav>
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-800 mb-2 capitalize">
+          <div className="mb-6 md:mb-8">
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2 capitalize">
               Répartition - {monthLabel}
             </h1>
-            <p className="text-slate-600">
+            <p className="text-sm md:text-base text-slate-600 dark:text-slate-400">
               Définissez comment allouer votre reste disponible dans différentes enveloppes
             </p>
           </div>
 
           {availableAmount <= 0 ? (
-            <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg mb-8">
-              <div className="flex items-center">
+            <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 md:p-6 rounded-r-lg mb-6 md:mb-8">
+              <div className="flex items-start md:items-center gap-3">
                 <svg
-                  className="h-6 w-6 text-red-500 mr-3"
+                  className="h-6 w-6 text-red-500 flex-shrink-0 mt-0.5 md:mt-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -141,10 +141,10 @@ export default function RepartitionPage() {
                   />
                 </svg>
                 <div>
-                  <p className="text-sm font-medium text-red-800">
+                  <p className="text-xs md:text-sm font-medium text-red-800 dark:text-red-300">
                     Aucun montant disponible à répartir
                   </p>
-                  <p className="text-sm text-red-700 mt-1">
+                  <p className="text-xs md:text-sm text-red-700 dark:text-red-400 mt-1">
                     Vos dépenses dépassent ou égalent vos revenus. Retournez à l&apos;onboarding
                     pour ajuster vos montants.
                   </p>
@@ -152,7 +152,7 @@ export default function RepartitionPage() {
               </div>
               <button
                 onClick={() => router.push('/onboarding')}
-                className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                className="mt-4 px-4 py-3 md:py-2 bg-red-600 text-white rounded-lg text-xs md:text-sm font-medium hover:bg-red-700 transition-colors min-h-[44px]"
               >
                 ← Retour à l&apos;onboarding
               </button>
@@ -160,7 +160,7 @@ export default function RepartitionPage() {
           ) : (
             <>
               {/* Composant principal de répartition */}
-              <div className="mb-8">
+              <div className="mb-6 md:mb-8">
                 <EnvelopeAllocator
                   envelopes={currentPlan.envelopes}
                   availableAmount={availableAmount}
@@ -170,17 +170,17 @@ export default function RepartitionPage() {
               </div>
 
               {/* Boutons de navigation */}
-              <div className="flex justify-between">
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-2 md:gap-0">
                 <button
                   onClick={() => router.push('/onboarding')}
-                  className="px-6 py-3 bg-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-300 transition-colors"
+                  className="px-4 md:px-6 py-3 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg font-medium hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors min-h-[44px] text-sm md:text-base order-2 sm:order-1"
                 >
                   ← Retour
                 </button>
                 <button
                   onClick={handleNext}
                   disabled={!isValid || currentPlan.envelopes.length === 0}
-                  className="px-8 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 disabled:bg-slate-400 disabled:cursor-not-allowed transition-colors"
+                  className="px-6 md:px-8 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 disabled:bg-slate-400 disabled:cursor-not-allowed transition-colors min-h-[44px] text-sm md:text-base order-1 sm:order-2"
                 >
                   Suivant : Visualisation →
                 </button>

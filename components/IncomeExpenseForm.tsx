@@ -76,13 +76,13 @@ export default function IncomeExpenseForm({ type, items, onChange, title }: Prop
   const colors = themeColors[type];
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-4 md:p-6">
       {/* En-tête */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className={`text-xl font-semibold ${colors.text}`}>{title}</h2>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+        <h2 className={`text-lg md:text-xl font-semibold ${colors.text}`}>{title}</h2>
         <div className={`px-4 py-2 rounded-lg ${colors.bg}`}>
-          <p className="text-sm text-slate-600">Total</p>
-          <p className={`text-2xl font-bold ${colors.text}`}>
+          <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">Total</p>
+          <p className={`text-xl md:text-2xl font-bold ${colors.text}`}>
             {formatCurrency(total)}
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function IncomeExpenseForm({ type, items, onChange, title }: Prop
       {/* Liste des items */}
       <div className="space-y-2 mb-4 max-h-96 overflow-y-auto">
         {items.length === 0 ? (
-          <div className="text-center py-8 text-slate-400">
+          <div className="text-center py-8 text-slate-400 dark:text-slate-500">
             <p>Aucun {type === 'income' ? 'revenu' : 'dépense'} ajouté</p>
             <p className="text-sm mt-1">
               Utilisez le formulaire ci-dessous pour en ajouter
@@ -115,17 +115,17 @@ export default function IncomeExpenseForm({ type, items, onChange, title }: Prop
 
       {/* Formulaire d'ajout */}
       <div className={`border-t ${colors.border} pt-4`}>
-        <p className="text-sm font-medium text-slate-700 mb-2">
+        <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
           Ajouter un{type === 'income' ? ' revenu' : 'e dépense'}
         </p>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"
             value={newItemName}
             onChange={(e) => setNewItemName(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder={type === 'income' ? 'Ex: Salaire' : 'Ex: Loyer'}
-            className={`flex-1 px-3 py-2 border border-slate-300 rounded focus:outline-none focus:ring-2 ${colors.ring}`}
+            className={`flex-1 px-3 py-3 md:py-2 border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded focus:outline-none focus:ring-2 ${colors.ring} min-h-[44px]`}
           />
           <input
             type="number"
@@ -135,12 +135,12 @@ export default function IncomeExpenseForm({ type, items, onChange, title }: Prop
             placeholder="Montant"
             min="0"
             step="0.01"
-            className={`w-32 px-3 py-2 border border-slate-300 rounded text-right focus:outline-none focus:ring-2 ${colors.ring}`}
+            className={`w-full sm:w-32 px-3 py-3 md:py-2 border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded text-right focus:outline-none focus:ring-2 ${colors.ring} min-h-[44px]`}
           />
           <button
             onClick={handleAdd}
             disabled={!newItemName.trim() || !newItemAmount}
-            className={`px-6 py-2 text-white rounded font-medium transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed ${colors.button}`}
+            className={`px-6 py-3 md:py-2 text-white rounded font-medium transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed ${colors.button} min-h-[44px] flex items-center justify-center`}
           >
             <svg
               className="w-5 h-5"
@@ -159,7 +159,7 @@ export default function IncomeExpenseForm({ type, items, onChange, title }: Prop
         </div>
 
         {/* Aide rapide */}
-        <div className="mt-3 flex items-start gap-2 text-xs text-slate-500">
+        <div className="mt-3 flex items-start gap-2 text-xs text-slate-500 dark:text-slate-400">
           <svg
             className="w-4 h-4 mt-0.5 flex-shrink-0"
             fill="currentColor"
@@ -172,7 +172,7 @@ export default function IncomeExpenseForm({ type, items, onChange, title }: Prop
             />
           </svg>
           <p>
-            Appuyez sur <kbd className="px-1 bg-slate-200 rounded">Entrée</kbd> pour
+            Appuyez sur <kbd className="px-1 bg-slate-200 dark:bg-slate-700 rounded">Entrée</kbd> pour
             ajouter rapidement
           </p>
         </div>
@@ -181,12 +181,12 @@ export default function IncomeExpenseForm({ type, items, onChange, title }: Prop
       {/* Statistiques */}
       {items.length > 0 && (
         <div className={`mt-4 pt-4 border-t ${colors.border}`}>
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-600">
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-sm">
+            <span className="text-slate-600 dark:text-slate-400">
               {items.length} {type === 'income' ? 'revenu' : 'dépense'}
               {items.length > 1 ? 's' : ''}
             </span>
-            <span className="text-slate-600">
+            <span className="text-slate-600 dark:text-slate-400">
               Moyenne : {formatCurrency(items.length > 0 ? total / items.length : 0)}
             </span>
           </div>

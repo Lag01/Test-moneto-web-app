@@ -15,7 +15,7 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-slate-800 dark:bg-slate-950 text-white w-64 min-h-screen p-6 flex flex-col">
+    <nav className="hidden md:flex bg-slate-800 dark:bg-slate-950 text-white w-64 min-h-screen p-6 flex-col fixed left-0 top-0 bottom-0 z-30">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-emerald-400 dark:text-emerald-300">Moneto</h1>
         <p className="text-sm text-slate-400 dark:text-slate-500 mt-1">Gestion financière</p>

@@ -1,4 +1,5 @@
 import Navigation from '@/components/Navigation';
+import MobileNav from '@/components/MobileNav';
 
 export default function LayoutWithNav({
   children,
@@ -6,9 +7,15 @@ export default function LayoutWithNav({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen">
+    <div className="min-h-screen">
+      {/* Navigation desktop (fixe, cachée sur mobile) */}
       <Navigation />
-      <main className="flex-1 bg-slate-50">
+
+      {/* Navigation mobile (drawer + header) */}
+      <MobileNav />
+
+      {/* Main content - margin pour desktop, padding-top pour mobile */}
+      <main className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-14 md:pt-0 md:ml-64">
         {children}
       </main>
     </div>

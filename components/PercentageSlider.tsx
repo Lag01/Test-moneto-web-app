@@ -72,15 +72,15 @@ export default function PercentageSlider({
 
   return (
     <div className="space-y-1">
-      <div className={`bg-white dark:bg-slate-800 rounded-lg shadow-md p-5 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-shadow ${
+      <div className={`bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 md:p-5 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-shadow ${
         error ? 'ring-2 ring-red-500' : ''
       }`}>
         {/* En-tête avec nom et bouton supprimer */}
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">{name}</h3>
+          <h3 className="text-base md:text-lg font-semibold text-slate-800 dark:text-slate-100">{name}</h3>
           <button
             onClick={() => onDelete(id)}
-            className="p-1.5 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/30 rounded transition-colors"
+            className="p-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/30 rounded transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
             title="Supprimer cette enveloppe"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,7 +103,7 @@ export default function PercentageSlider({
             step="0.5"
             value={percentage}
             onChange={(e) => handleSliderChange(e.target.value)}
-            className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-3 md:h-2 rounded-lg appearance-none cursor-pointer"
             style={{
               background: `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #e2e8f0 ${percentage}%, #e2e8f0 100%)`,
             }}
@@ -111,7 +111,7 @@ export default function PercentageSlider({
         </div>
 
         {/* Pourcentage et Montant */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-4">
           {/* Input pourcentage */}
           <div className="flex items-center gap-2 flex-1">
             <input
@@ -123,7 +123,7 @@ export default function PercentageSlider({
               min="0"
               max="100"
               step="0.5"
-              className={`w-20 px-3 py-2 border border-slate-300 dark:border-slate-600 rounded text-center font-semibold text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 ${
+              className={`w-20 px-3 py-3 md:py-2 border border-slate-300 dark:border-slate-600 rounded text-center font-semibold text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 min-h-[44px] ${
                 error ? 'border-red-500' : ''
               }`}
             />
@@ -131,9 +131,9 @@ export default function PercentageSlider({
           </div>
 
           {/* Montant calculé */}
-          <div className="flex-1 text-right">
-            <p className="text-sm text-slate-500 dark:text-slate-400">Montant</p>
-            <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency(amount)}</p>
+          <div className="flex-1 sm:text-right">
+            <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400">Montant</p>
+            <p className="text-lg md:text-xl font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency(amount)}</p>
           </div>
         </div>
 

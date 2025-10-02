@@ -138,19 +138,19 @@ export default function DashboardPage() {
 
   return (
     <LayoutWithNav>
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-slate-800 mb-2">Dashboard</h1>
-          <p className="text-slate-600 mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">Dashboard</h1>
+          <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 mb-6 md:mb-8">
             Gérez vos plans mensuels et consultez votre historique financier
           </p>
 
           {/* Messages d'erreur/succès import */}
           {importError && (
-            <div className="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
-              <div className="flex items-center">
+            <div className="mb-4 md:mb-6 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-3 md:p-4 rounded-r-lg">
+              <div className="flex items-start md:items-center gap-2 md:gap-3">
                 <svg
-                  className="h-5 w-5 text-red-500 mr-3"
+                  className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5 md:mt-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -160,16 +160,16 @@ export default function DashboardPage() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <p className="text-sm font-medium text-red-800">{importError}</p>
+                <p className="text-xs md:text-sm font-medium text-red-800 dark:text-red-300">{importError}</p>
               </div>
             </div>
           )}
 
           {importSuccess && (
-            <div className="mb-6 bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg">
-              <div className="flex items-center">
+            <div className="mb-4 md:mb-6 bg-emerald-50 dark:bg-emerald-900/20 border-l-4 border-emerald-500 p-3 md:p-4 rounded-r-lg">
+              <div className="flex items-start md:items-center gap-2 md:gap-3">
                 <svg
-                  className="h-5 w-5 text-emerald-500 mr-3"
+                  className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5 md:mt-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -179,16 +179,16 @@ export default function DashboardPage() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <p className="text-sm font-medium text-emerald-800">{importSuccess}</p>
+                <p className="text-xs md:text-sm font-medium text-emerald-800 dark:text-emerald-300">{importSuccess}</p>
               </div>
             </div>
           )}
 
           {/* Boutons d'action */}
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
             <button
               onClick={handleCreateNew}
-              className="px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors flex items-center gap-2"
+              className="px-4 md:px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 min-h-[44px] text-sm md:text-base"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -205,7 +205,7 @@ export default function DashboardPage() {
               <>
                 <button
                   onClick={() => setShowCopyModal(true)}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
+                  className="px-4 md:px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 min-h-[44px] text-sm md:text-base"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -215,12 +215,13 @@ export default function DashboardPage() {
                       d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
                     />
                   </svg>
-                  Copier un plan
+                  <span className="hidden sm:inline">Copier un plan</span>
+                  <span className="sm:hidden">Copier</span>
                 </button>
 
                 <button
                   onClick={handleExportAll}
-                  className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors flex items-center gap-2"
+                  className="px-4 md:px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 min-h-[44px] text-sm md:text-base"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -230,14 +231,15 @@ export default function DashboardPage() {
                       d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                     />
                   </svg>
-                  Exporter tous les plans
+                  <span className="hidden sm:inline">Exporter tous</span>
+                  <span className="sm:hidden">Exporter</span>
                 </button>
               </>
             )}
 
             <button
               onClick={handleImportClick}
-              className="px-6 py-3 bg-slate-600 text-white rounded-lg font-medium hover:bg-slate-700 transition-colors flex items-center gap-2"
+              className="px-4 md:px-6 py-3 bg-slate-600 text-white rounded-lg font-medium hover:bg-slate-700 transition-colors flex items-center justify-center gap-2 min-h-[44px] text-sm md:text-base"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -247,7 +249,7 @@ export default function DashboardPage() {
                   d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                 />
               </svg>
-              Importer un plan
+              Importer
             </button>
             <input
               ref={fileInputRef}
@@ -260,9 +262,9 @@ export default function DashboardPage() {
 
           {/* Liste des plans */}
           {monthlyPlans.length === 0 ? (
-            <div className="bg-white rounded-lg shadow p-12 text-center">
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-8 md:p-12 text-center">
               <svg
-                className="w-16 h-16 mx-auto text-slate-300 mb-4"
+                className="w-12 h-12 md:w-16 md:h-16 mx-auto text-slate-300 dark:text-slate-600 mb-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -274,15 +276,15 @@ export default function DashboardPage() {
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              <p className="text-slate-500 text-lg mb-2">
+              <p className="text-slate-500 dark:text-slate-400 text-base md:text-lg mb-2">
                 Aucun plan mensuel créé pour le moment
               </p>
-              <p className="text-slate-400 mb-6">
+              <p className="text-sm md:text-base text-slate-400 dark:text-slate-500 mb-6">
                 Créez votre premier plan pour commencer à gérer vos finances
               </p>
               <button
                 onClick={handleCreateNew}
-                className="px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors inline-flex items-center gap-2"
+                className="px-4 md:px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors inline-flex items-center justify-center gap-2 min-h-[44px] text-sm md:text-base"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -296,8 +298,8 @@ export default function DashboardPage() {
               </button>
             </div>
           ) : (
-            <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-slate-800 mb-4">
+            <div className="space-y-3 md:space-y-4">
+              <h2 className="text-lg md:text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">
                 Plans mensuels ({monthlyPlans.length})
               </h2>
 
@@ -312,38 +314,38 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={plan.id}
-                    className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
+                    className="bg-white dark:bg-slate-800 rounded-lg shadow p-4 md:p-6 hover:shadow-md transition-shadow"
                   >
-                    <div className="flex items-start justify-between">
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-slate-800 capitalize mb-2">
+                        <h3 className="text-lg md:text-xl font-semibold text-slate-800 dark:text-slate-100 capitalize mb-2">
                           {monthLabel}
                         </h3>
 
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-3 md:mt-4">
                           <div>
-                            <p className="text-sm text-slate-500">Revenus</p>
-                            <p className="text-lg font-semibold text-green-600">
+                            <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400">Revenus</p>
+                            <p className="text-base md:text-lg font-semibold text-green-600 dark:text-green-400">
                               {formatCurrency(summary.totalIncome)}
                             </p>
                           </div>
                           <div>
-                            <p className="text-sm text-slate-500">Dépenses fixes</p>
-                            <p className="text-lg font-semibold text-red-600">
+                            <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400">Dépenses fixes</p>
+                            <p className="text-base md:text-lg font-semibold text-red-600 dark:text-red-400">
                               {formatCurrency(summary.totalFixedExpenses)}
                             </p>
                           </div>
                           <div>
-                            <p className="text-sm text-slate-500">Disponible</p>
-                            <p className="text-lg font-semibold text-blue-600">
+                            <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400">Disponible</p>
+                            <p className="text-base md:text-lg font-semibold text-blue-600 dark:text-blue-400">
                               {formatCurrency(summary.availableAmount)}
                             </p>
                           </div>
                           <div>
-                            <p className="text-sm text-slate-500">Solde final</p>
+                            <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400">Solde final</p>
                             <p
-                              className={`text-lg font-semibold ${
-                                summary.finalBalance >= 0 ? 'text-emerald-600' : 'text-red-600'
+                              className={`text-base md:text-lg font-semibold ${
+                                summary.finalBalance >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'
                               }`}
                             >
                               {formatCurrency(summary.finalBalance)}
@@ -351,34 +353,34 @@ export default function DashboardPage() {
                           </div>
                         </div>
 
-                        <p className="text-sm text-slate-400 mt-3">
+                        <p className="text-xs md:text-sm text-slate-400 dark:text-slate-500 mt-3">
                           Dernière modification :{' '}
                           {formatDate(plan.updatedAt, 'DD/MM/YYYY HH:mm')}
                         </p>
                       </div>
 
-                      <div className="flex flex-col gap-2 ml-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex lg:flex-col gap-2 lg:ml-4">
                         <button
                           onClick={() => handleSelectPlan(plan.id)}
-                          className="px-4 py-2 bg-slate-100 text-slate-700 rounded hover:bg-slate-200 transition-colors text-sm font-medium"
+                          className="px-3 md:px-4 py-2 md:py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-xs md:text-sm font-medium min-h-[44px] flex items-center justify-center"
                         >
                           Modifier
                         </button>
                         <button
                           onClick={() => handleViewPlan(plan.id)}
-                          className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 transition-colors text-sm font-medium"
+                          className="px-3 md:px-4 py-2 md:py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors text-xs md:text-sm font-medium min-h-[44px] flex items-center justify-center"
                         >
                           Visualiser
                         </button>
                         <button
                           onClick={() => handleExportPlan(plan.id)}
-                          className="px-4 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors text-sm font-medium"
+                          className="px-3 md:px-4 py-2 md:py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors text-xs md:text-sm font-medium min-h-[44px] flex items-center justify-center"
                         >
                           Exporter
                         </button>
                         <button
                           onClick={() => handleDeletePlan(plan.id)}
-                          className="px-4 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors text-sm font-medium"
+                          className="px-3 md:px-4 py-2 md:py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors text-xs md:text-sm font-medium min-h-[44px] flex items-center justify-center"
                         >
                           Supprimer
                         </button>
@@ -395,17 +397,17 @@ export default function DashboardPage() {
       {/* Modal de copie de plan */}
       {showCopyModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-            <div className="p-6 border-b border-slate-200">
-              <h2 className="text-2xl font-bold text-slate-800">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="p-4 md:p-6 border-b border-slate-200 dark:border-slate-700">
+              <h2 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100">
                 Copier un plan existant
               </h2>
-              <p className="text-slate-600 mt-1">
+              <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 mt-1">
                 Sélectionnez le plan que vous souhaitez copier
               </p>
             </div>
 
-            <div className="p-6 space-y-3">
+            <div className="p-4 md:p-6 space-y-2 md:space-y-3">
               {sortedPlans.map((plan) => {
                 const monthDate = new Date(plan.month + '-01');
                 const monthLabel = monthDate.toLocaleDateString('fr-FR', {
@@ -418,21 +420,21 @@ export default function DashboardPage() {
                   <button
                     key={plan.id}
                     onClick={() => handleCopyPlan(plan.id)}
-                    className="w-full text-left p-4 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors"
+                    className="w-full text-left p-3 md:p-4 bg-slate-50 dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 rounded-lg border border-slate-200 dark:border-slate-600 transition-colors min-h-[44px]"
                   >
-                    <h3 className="text-lg font-semibold text-slate-800 capitalize mb-2">
+                    <h3 className="text-base md:text-lg font-semibold text-slate-800 dark:text-slate-100 capitalize mb-2">
                       {monthLabel}
                     </h3>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
                       <div>
-                        <span className="text-slate-500">Revenus: </span>
-                        <span className="font-semibold text-green-600">
+                        <span className="text-slate-500 dark:text-slate-400">Revenus: </span>
+                        <span className="font-semibold text-green-600 dark:text-green-400">
                           {formatCurrency(summary.totalIncome)}
                         </span>
                       </div>
                       <div>
-                        <span className="text-slate-500">Dépenses: </span>
-                        <span className="font-semibold text-red-600">
+                        <span className="text-slate-500 dark:text-slate-400">Dépenses: </span>
+                        <span className="font-semibold text-red-600 dark:text-red-400">
                           {formatCurrency(summary.totalFixedExpenses)}
                         </span>
                       </div>
@@ -442,10 +444,10 @@ export default function DashboardPage() {
               })}
             </div>
 
-            <div className="p-6 border-t border-slate-200">
+            <div className="p-4 md:p-6 border-t border-slate-200 dark:border-slate-700">
               <button
                 onClick={() => setShowCopyModal(false)}
-                className="w-full px-6 py-3 bg-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-300 transition-colors"
+                className="w-full px-4 md:px-6 py-3 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg font-medium hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors min-h-[44px]"
               >
                 Annuler
               </button>

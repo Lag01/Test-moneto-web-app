@@ -88,20 +88,20 @@ export default function EnvelopeAllocator({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       {/* En-tête avec montant disponible */}
-      <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg shadow-lg p-6">
-        <h2 className="text-lg font-semibold mb-2">Montant disponible à répartir</h2>
-        <p className="text-4xl font-bold">{formatCurrency(availableAmount)}</p>
+      <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg shadow-lg p-4 md:p-6">
+        <h2 className="text-base md:text-lg font-semibold mb-2">Montant disponible à répartir</h2>
+        <p className="text-3xl md:text-4xl font-bold">{formatCurrency(availableAmount)}</p>
       </div>
 
       {/* Barre de validation */}
       <div
-        className={`rounded-lg p-4 text-white transition-all duration-300 ${getValidationColor()}`}
+        className={`rounded-lg p-3 md:p-4 text-white transition-all duration-300 ${getValidationColor()}`}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
               {isValid ? (
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path
@@ -121,8 +121,8 @@ export default function EnvelopeAllocator({
               )}
             </div>
             <div>
-              <p className="text-lg font-bold">{getValidationText()}</p>
-              <p className="text-sm opacity-90">
+              <p className="text-base md:text-lg font-bold">{getValidationText()}</p>
+              <p className="text-xs md:text-sm opacity-90">
                 Total alloué : {totalPercentage.toFixed(1)}%
               </p>
             </div>
@@ -131,7 +131,7 @@ export default function EnvelopeAllocator({
           {!isValid && (
             <button
               onClick={handleAutoNormalize}
-              className="px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg font-medium transition-colors"
+              className="px-4 py-3 md:py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg font-medium transition-colors min-h-[44px] w-full sm:w-auto"
             >
               Ajuster à 100%
             </button>
@@ -148,11 +148,11 @@ export default function EnvelopeAllocator({
       </div>
 
       {/* Liste des enveloppes */}
-      <div className="grid gap-4">
+      <div className="grid gap-3 md:gap-4">
         {envelopes.length === 0 ? (
-          <div className="text-center py-12 bg-slate-50 rounded-lg border-2 border-dashed border-slate-300">
-            <p className="text-slate-500 text-lg mb-2">Aucune enveloppe créée</p>
-            <p className="text-slate-400 text-sm">
+          <div className="text-center py-8 md:py-12 bg-slate-50 dark:bg-slate-800 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-700">
+            <p className="text-slate-500 dark:text-slate-400 text-base md:text-lg mb-2">Aucune enveloppe créée</p>
+            <p className="text-slate-400 dark:text-slate-500 text-sm">
               Ajoutez votre première enveloppe ci-dessous
             </p>
           </div>
@@ -173,23 +173,23 @@ export default function EnvelopeAllocator({
       </div>
 
       {/* Formulaire d'ajout */}
-      <div className="bg-white rounded-lg shadow-md p-5 border border-slate-200">
-        <h3 className="text-lg font-semibold text-slate-800 mb-3">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 md:p-5 border border-slate-200 dark:border-slate-700">
+        <h3 className="text-base md:text-lg font-semibold text-slate-800 dark:text-slate-100 mb-3">
           Ajouter une enveloppe personnalisée
         </h3>
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
           <input
             type="text"
             value={newEnvelopeName}
             onChange={(e) => setNewEnvelopeName(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleAddEnvelope()}
             placeholder="Ex: Vacances, Projet, etc."
-            className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-4 py-3 md:py-2 border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[44px]"
           />
           <button
             onClick={handleAddEnvelope}
             disabled={!newEnvelopeName.trim()}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-6 py-3 md:py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[44px]"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -199,13 +199,13 @@ export default function EnvelopeAllocator({
                 d="M12 4v16m8-8H4"
               />
             </svg>
-            Ajouter
+            <span className="hidden sm:inline">Ajouter</span>
           </button>
         </div>
 
         {/* Info sur le pourcentage restant */}
         {!isValid && remainingPercentage > 0 && (
-          <div className="mt-3 text-sm text-slate-600">
+          <div className="mt-3 text-sm text-slate-600 dark:text-slate-400">
             💡 La nouvelle enveloppe sera initialisée à{' '}
             <span className="font-semibold">{remainingPercentage.toFixed(1)}%</span>
           </div>
@@ -214,15 +214,15 @@ export default function EnvelopeAllocator({
 
       {/* Résumé */}
       {envelopes.length > 0 && (
-        <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+        <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
-              <p className="text-sm text-slate-600">Nombre d&apos;enveloppes</p>
-              <p className="text-2xl font-bold text-slate-800">{envelopes.length}</p>
+              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">Nombre d&apos;enveloppes</p>
+              <p className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100">{envelopes.length}</p>
             </div>
             <div>
-              <p className="text-sm text-slate-600">Montant total alloué</p>
-              <p className="text-2xl font-bold text-emerald-600">
+              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">Montant total alloué</p>
+              <p className="text-xl md:text-2xl font-bold text-emerald-600 dark:text-emerald-400">
                 {formatCurrency((availableAmount * totalPercentage) / 100)}
               </p>
             </div>
