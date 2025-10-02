@@ -28,23 +28,23 @@ export default function PresentationPage() {
 
         {/* Image illustrative / Placeholder */}
         <div className="mb-16 rounded-2xl overflow-hidden shadow-2xl">
-          <div className="bg-gradient-to-br from-emerald-100 to-blue-100 dark:from-slate-800 dark:to-slate-700 p-12 flex items-center justify-center aspect-video">
-            <div className="grid grid-cols-3 gap-4 w-full max-w-2xl">
+          <div className="bg-gradient-to-br from-emerald-100 to-blue-100 dark:from-slate-800 dark:to-slate-700 p-8 md:py-6 md:px-10 flex items-center justify-center aspect-video md:aspect-[3/1]">
+            <div className="grid grid-cols-3 gap-3 md:gap-6 w-full max-w-3xl">
               {/* Simulation visuelle de l'app */}
-              <div className="bg-white dark:bg-slate-600 rounded-lg p-4 shadow-lg">
-                <div className="h-3 bg-emerald-500 rounded mb-2"></div>
-                <div className="h-2 bg-slate-200 dark:bg-slate-500 rounded mb-1"></div>
-                <div className="h-2 bg-slate-200 dark:bg-slate-500 rounded w-2/3"></div>
+              <div className="bg-white dark:bg-slate-600 rounded-lg p-3 md:p-8 shadow-lg">
+                <div className="h-3 md:h-8 bg-emerald-500 rounded mb-2 md:mb-4"></div>
+                <div className="h-2 md:h-6 bg-slate-200 dark:bg-slate-500 rounded mb-1 md:mb-3"></div>
+                <div className="h-2 md:h-6 bg-slate-200 dark:bg-slate-500 rounded w-2/3"></div>
               </div>
-              <div className="bg-white dark:bg-slate-600 rounded-lg p-4 shadow-lg">
-                <div className="h-3 bg-blue-500 rounded mb-2"></div>
-                <div className="h-2 bg-slate-200 dark:bg-slate-500 rounded mb-1"></div>
-                <div className="h-2 bg-slate-200 dark:bg-slate-500 rounded w-3/4"></div>
+              <div className="bg-white dark:bg-slate-600 rounded-lg p-3 md:p-8 shadow-lg">
+                <div className="h-3 md:h-8 bg-blue-500 rounded mb-2 md:mb-4"></div>
+                <div className="h-2 md:h-6 bg-slate-200 dark:bg-slate-500 rounded mb-1 md:mb-3"></div>
+                <div className="h-2 md:h-6 bg-slate-200 dark:bg-slate-500 rounded w-3/4"></div>
               </div>
-              <div className="bg-white dark:bg-slate-600 rounded-lg p-4 shadow-lg">
-                <div className="h-3 bg-purple-500 rounded mb-2"></div>
-                <div className="h-2 bg-slate-200 dark:bg-slate-500 rounded mb-1"></div>
-                <div className="h-2 bg-slate-200 dark:bg-slate-500 rounded w-1/2"></div>
+              <div className="bg-white dark:bg-slate-600 rounded-lg p-3 md:p-8 shadow-lg">
+                <div className="h-3 md:h-8 bg-purple-500 rounded mb-2 md:mb-4"></div>
+                <div className="h-2 md:h-6 bg-slate-200 dark:bg-slate-500 rounded mb-1 md:mb-3"></div>
+                <div className="h-2 md:h-6 bg-slate-200 dark:bg-slate-500 rounded w-1/2"></div>
               </div>
             </div>
           </div>
