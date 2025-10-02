@@ -140,7 +140,7 @@ export function getPlanSummary(plan: MonthlyPlan): PlanSummary {
 export function normalizeEnvelopePercentages(envelopes: Envelope[]): Envelope[] {
   if (envelopes.length === 0) return envelopes;
 
-  const { fixed, percentage } = separateEnvelopesByType(envelopes);
+  const { percentage } = separateEnvelopesByType(envelopes);
 
   if (percentage.length === 0) return envelopes; // Que des fixes, rien à normaliser
 

@@ -491,9 +491,17 @@ export const useAppStore = create<AppState>()(
           }
 
           // Migration : Ajouter le type 'percentage' aux enveloppes existantes sans type
-          plan.envelopes = plan.envelopes.map((env) => {
-            if (!('type' in env)) {
-              return { ...env, type: 'percentage' as const };
+          plan.envelopes = plan.envelopes.map((env): Envelope => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const anyEnv = env as any;
+            if (!('type' in anyEnv)) {
+              return {
+                id: anyEnv.id,
+                name: anyEnv.name,
+                type: 'percentage' as const,
+                percentage: anyEnv.percentage,
+                amount: anyEnv.amount,
+              };
             }
             return env;
           });

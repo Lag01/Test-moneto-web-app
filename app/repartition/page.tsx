@@ -60,7 +60,7 @@ export default function RepartitionPage() {
 
       updateMonthlyPlan(currentPlan.id, { envelopes: withAmounts });
     }
-  }, [currentPlan?.id]);
+  }, [currentPlan, updateMonthlyPlan]);
 
   if (!currentPlan) {
     return (

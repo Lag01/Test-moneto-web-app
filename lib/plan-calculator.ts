@@ -1,9 +1,7 @@
-import type { MonthlyPlan, CalculatedResults, Envelope } from '@/store';
+import type { MonthlyPlan, CalculatedResults } from '@/store';
 import {
   calculateFixedTotal,
   recalculateEnvelopeAmounts,
-  calculateFixedEnvelopesTotal,
-  separateEnvelopesByType
 } from './monthly-plan';
 
 /**
@@ -23,26 +21,19 @@ export function calculatePlanResults(plan: MonthlyPlan): CalculatedResults {
   // 3. Reste disponible brut = Revenus - Dépenses fixes
   const availableAmount = totalIncome - totalExpenses;
 
-  // 4. Séparer les enveloppes fixes et en pourcentage
-  const { fixed, percentage } = separateEnvelopesByType(plan.envelopes);
-  const fixedEnvelopesTotal = calculateFixedEnvelopesTotal(plan.envelopes);
-
-  // 5. Montant disponible pour les enveloppes en pourcentage
-  const availableForPercentage = availableAmount - fixedEnvelopesTotal;
-
-  // 6. Recalculer les montants des enveloppes (fixes gardent leur montant, % sont recalculés)
+  // 4. Recalculer les montants des enveloppes (fixes gardent leur montant, % sont recalculés)
   const updatedEnvelopes = recalculateEnvelopeAmounts(
     plan.envelopes,
     availableAmount
   );
 
-  // 7. Total alloué dans toutes les enveloppes (fixes + pourcentage)
+  // 5. Total alloué dans toutes les enveloppes (fixes + pourcentage)
   const totalEnvelopes = updatedEnvelopes.reduce(
     (sum, env) => sum + env.amount,
     0
   );
 
-  // 8. Solde final = Disponible brut - Total enveloppes
+  // 6. Solde final = Disponible brut - Total enveloppes
   const finalBalance = availableAmount - totalEnvelopes;
 
   return {
