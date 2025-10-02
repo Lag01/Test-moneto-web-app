@@ -181,14 +181,13 @@ export default function EnvelopeAllocator({
           </span>
         </div>
 
-        {!isValid && (
-          <button
-            onClick={handleAutoNormalize}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-colors min-h-[44px]"
-          >
-            Ajuster à 100%
-          </button>
-        )}
+        <button
+          onClick={handleAutoNormalize}
+          disabled={isValid}
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-colors min-h-[44px] disabled:bg-slate-300 dark:disabled:bg-slate-600 disabled:text-slate-500 dark:disabled:text-slate-400 disabled:cursor-not-allowed disabled:hover:bg-slate-300 dark:disabled:hover:bg-slate-600"
+        >
+          Ajuster à 100%
+        </button>
       </div>
 
       {/* Liste des enveloppes */}
