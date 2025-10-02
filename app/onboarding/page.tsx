@@ -101,34 +101,34 @@ export default function OnboardingPage() {
           </div>
 
           {/* Résumé */}
-          <div className="bg-gradient-to-r from-emerald-500 to-blue-500 text-white rounded-lg shadow-lg p-4 md:p-6 mb-6">
-            <h3 className="text-base md:text-lg font-semibold mb-4">Résumé</h3>
+          <div className="bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl p-5 md:p-6 mb-6">
+            <h3 className="text-base md:text-lg font-semibold text-slate-700 dark:text-slate-200 mb-4">Résumé</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
               <div>
-                <p className="text-emerald-100 text-xs md:text-sm mb-1">Total revenus</p>
-                <p className="text-2xl md:text-3xl font-bold">
+                <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-1">Total revenus</p>
+                <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-50">
                   {formatCurrency(
                     currentPlan.fixedIncomes.reduce((sum, i) => sum + i.amount, 0)
                   )}
                 </p>
               </div>
               <div>
-                <p className="text-emerald-100 text-xs md:text-sm mb-1">Total dépenses</p>
-                <p className="text-2xl md:text-3xl font-bold">
+                <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-1">Total dépenses</p>
+                <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-50">
                   {formatCurrency(
                     currentPlan.fixedExpenses.reduce((sum, i) => sum + i.amount, 0)
                   )}
                 </p>
               </div>
               <div>
-                <p className="text-emerald-100 text-xs md:text-sm mb-1">Reste disponible</p>
-                <p className="text-2xl md:text-3xl font-bold">{formatCurrency(availableAmount)}</p>
+                <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-1">Reste disponible</p>
+                <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-50">{formatCurrency(availableAmount)}</p>
               </div>
             </div>
 
             {availableAmount <= 0 && (
-              <div className="mt-4 bg-red-500 bg-opacity-20 border border-red-200 rounded p-3">
-                <p className="text-xs md:text-sm">
+              <div className="mt-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded p-3">
+                <p className="text-xs md:text-sm text-red-800 dark:text-red-300">
                   ⚠️ Attention : Vos dépenses dépassent ou égalent vos revenus. Veuillez
                   ajuster vos montants.
                 </p>
