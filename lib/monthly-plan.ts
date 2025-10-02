@@ -20,31 +20,78 @@ export function calculateAvailableAmount(
 }
 
 /**
+ * Sépare les enveloppes fixes et en pourcentage
+ */
+export function separateEnvelopesByType(envelopes: Envelope[]): {
+  fixed: Envelope[];
+  percentage: Envelope[];
+} {
+  return {
+    fixed: envelopes.filter((env) => env.type === 'fixed'),
+    percentage: envelopes.filter((env) => env.type === 'percentage'),
+  };
+}
+
+/**
+ * Calcule le total des enveloppes fixes
+ */
+export function calculateFixedEnvelopesTotal(envelopes: Envelope[]): number {
+  const { fixed } = separateEnvelopesByType(envelopes);
+  return fixed.reduce((sum, env) => sum + env.amount, 0);
+}
+
+/**
+ * Calcule le montant disponible pour les enveloppes en pourcentage
+ * (après déduction des enveloppes fixes)
+ */
+export function calculateAvailableForPercentage(
+  fixedIncomes: FixedItem[],
+  fixedExpenses: FixedItem[],
+  envelopes: Envelope[]
+): number {
+  const availableAmount = calculateAvailableAmount(fixedIncomes, fixedExpenses);
+  const fixedEnvelopesTotal = calculateFixedEnvelopesTotal(envelopes);
+  return availableAmount - fixedEnvelopesTotal;
+}
+
+/**
  * Calcule les montants des enveloppes en fonction des pourcentages
  */
 export function calculateEnvelopeAmounts(
   envelopes: Envelope[],
   availableAmount: number
 ): Envelope[] {
-  return envelopes.map((envelope) => ({
-    ...envelope,
-    amount: (availableAmount * envelope.percentage) / 100,
-  }));
+  return envelopes.map((envelope) => {
+    if (envelope.type === 'fixed') {
+      // Les enveloppes fixes gardent leur montant
+      return envelope;
+    }
+    // Les enveloppes en pourcentage sont calculées
+    return {
+      ...envelope,
+      amount: (availableAmount * envelope.percentage) / 100,
+    };
+  });
 }
 
 /**
  * Valide que la somme des pourcentages des enveloppes = 100%
+ * Ne compte que les enveloppes en pourcentage
  */
 export function validateEnvelopesPercentage(envelopes: Envelope[]): boolean {
-  const total = envelopes.reduce((sum, env) => sum + env.percentage, 0);
+  const { percentage } = separateEnvelopesByType(envelopes);
+  if (percentage.length === 0) return true; // Pas d'enveloppes en %, validation OK
+  const total = percentage.reduce((sum, env) => sum + env.percentage, 0);
   return Math.abs(total - 100) < 0.01; // Tolérance pour les erreurs d'arrondi
 }
 
 /**
  * Récupère le total des pourcentages actuels
+ * Ne compte que les enveloppes en pourcentage
  */
 export function getTotalPercentage(envelopes: Envelope[]): number {
-  return envelopes.reduce((sum, env) => sum + env.percentage, 0);
+  const { percentage } = separateEnvelopesByType(envelopes);
+  return percentage.reduce((sum, env) => sum + env.percentage, 0);
 }
 
 /**
@@ -88,9 +135,14 @@ export function getPlanSummary(plan: MonthlyPlan): PlanSummary {
 /**
  * Normalise les pourcentages des enveloppes pour qu'ils totalisent exactement 100%
  * Ajuste proportionnellement chaque pourcentage
+ * Ne touche QUE les enveloppes en pourcentage, ignore les fixes
  */
 export function normalizeEnvelopePercentages(envelopes: Envelope[]): Envelope[] {
   if (envelopes.length === 0) return envelopes;
+
+  const { fixed, percentage } = separateEnvelopesByType(envelopes);
+
+  if (percentage.length === 0) return envelopes; // Que des fixes, rien à normaliser
 
   const total = getTotalPercentage(envelopes);
 
@@ -99,35 +151,53 @@ export function normalizeEnvelopePercentages(envelopes: Envelope[]): Envelope[] 
     return envelopes;
   }
 
-  // Si total = 0, répartir équitablement
+  // Si total = 0, répartir équitablement sur les enveloppes en %
   if (total === 0) {
-    const equalPercentage = 100 / envelopes.length;
-    return envelopes.map((env) => ({
-      ...env,
-      percentage: equalPercentage,
-    }));
+    const equalPercentage = 100 / percentage.length;
+    return envelopes.map((env) => {
+      if (env.type === 'fixed') return env; // Garder les fixes intactes
+      return {
+        ...env,
+        percentage: equalPercentage,
+      };
+    });
   }
 
-  // Ajuster proportionnellement
+  // Ajuster proportionnellement seulement les enveloppes en %
   const factor = 100 / total;
-  return envelopes.map((env) => ({
-    ...env,
-    percentage: env.percentage * factor,
-  }));
+  return envelopes.map((env) => {
+    if (env.type === 'fixed') return env; // Garder les fixes intactes
+    return {
+      ...env,
+      percentage: env.percentage * factor,
+    };
+  });
 }
 
 /**
  * Ajuste les montants des enveloppes en fonction des pourcentages
  * Utilisé après modification des pourcentages ou du montant disponible
+ * Prend en compte les enveloppes fixes qui sont déduites en premier
  */
 export function recalculateEnvelopeAmounts(
   envelopes: Envelope[],
   availableAmount: number
 ): Envelope[] {
-  return envelopes.map((env) => ({
-    ...env,
-    amount: (availableAmount * env.percentage) / 100,
-  }));
+  // Calculer d'abord le montant disponible après enveloppes fixes
+  const fixedTotal = calculateFixedEnvelopesTotal(envelopes);
+  const availableForPercentage = availableAmount - fixedTotal;
+
+  return envelopes.map((env) => {
+    if (env.type === 'fixed') {
+      // Les enveloppes fixes gardent leur montant
+      return env;
+    }
+    // Les enveloppes en pourcentage sont calculées sur le reste
+    return {
+      ...env,
+      amount: (availableForPercentage * env.percentage) / 100,
+    };
+  });
 }
 
 /**

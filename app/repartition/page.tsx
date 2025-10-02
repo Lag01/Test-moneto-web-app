@@ -21,24 +21,28 @@ export default function RepartitionPage() {
         {
           id: `env-${Date.now()}-1`,
           name: 'Épargne',
+          type: 'percentage' as const,
           percentage: 30,
           amount: 0,
         },
         {
           id: `env-${Date.now()}-2`,
           name: 'Loisirs',
+          type: 'percentage' as const,
           percentage: 20,
           amount: 0,
         },
         {
           id: `env-${Date.now()}-3`,
           name: 'Livret A',
+          type: 'percentage' as const,
           percentage: 25,
           amount: 0,
         },
         {
           id: `env-${Date.now()}-4`,
           name: 'Crypto',
+          type: 'percentage' as const,
           percentage: 25,
           amount: 0,
         },

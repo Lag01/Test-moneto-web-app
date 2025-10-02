@@ -41,8 +41,9 @@ export interface FixedItem {
 export interface Envelope {
   id: string;
   name: string;
-  percentage: number;
-  amount: number;
+  type: 'percentage' | 'fixed'; // percentage: en % du reste, fixed: montant fixe en euros
+  percentage: number; // Utilisé seulement si type='percentage'
+  amount: number; // Montant calculé (percentage) ou fixé (fixed)
 }
 
 /**
@@ -488,6 +489,14 @@ export const useAppStore = create<AppState>()(
             };
             plan.calculatedResults = emptyResults;
           }
+
+          // Migration : Ajouter le type 'percentage' aux enveloppes existantes sans type
+          plan.envelopes = plan.envelopes.map((env) => {
+            if (!('type' in env)) {
+              return { ...env, type: 'percentage' as const };
+            }
+            return env;
+          });
 
           // Recalculer immédiatement les résultats
           state.recalculatePlan(plan.id);
