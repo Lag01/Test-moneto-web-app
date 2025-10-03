@@ -1,14 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTutorialContext } from '@/context/TutorialContext';
 import { useTutorial } from '@/hooks/useTutorial';
 
 export default function TutorialBanner() {
-  const { isActive, currentStep, currentStepIndex, totalSteps } = useTutorialContext();
+  const { isActive, currentStep, currentStepIndex, totalSteps, isBannerExpanded, setBannerExpanded } = useTutorialContext();
   const { nextStep, previousStep, quitTutorial, finishTutorial } = useTutorial();
-  const [isExpanded, setIsExpanded] = useState(true);
 
   if (!isActive || !currentStep) return null;
 
@@ -25,12 +23,12 @@ export default function TutorialBanner() {
   return (
     <>
       <motion.div
-        initial={{ y: 100, opacity: 0 }}
+        initial={{ y: '100%', opacity: 0 }}
         animate={{
-          y: isExpanded ? 0 : 'calc(100% - 24px)',
-          opacity: 1
+          y: isBannerExpanded ? 0 : '100%',
+          opacity: isBannerExpanded ? 1 : 0
         }}
-        exit={{ y: 100, opacity: 0 }}
+        exit={{ y: '100%', opacity: 0 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-800 border-t-4 border-emerald-400 dark:border-emerald-500 shadow-2xl md:hidden"
       >
@@ -44,11 +42,8 @@ export default function TutorialBanner() {
           />
         </div>
 
-        {/* En-tête avec bouton expand/collapse - cliquable pour expand/collapse */}
-        <div
-          className="px-4 py-2 flex items-center justify-between bg-gradient-to-r from-emerald-500/10 to-blue-500/10 dark:from-emerald-500/5 dark:to-blue-500/5 cursor-pointer active:bg-emerald-500/20 dark:active:bg-emerald-500/10 transition-colors"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
+        {/* En-tête avec titre et bouton de fermeture */}
+        <div className="px-4 py-2 flex items-center justify-between bg-gradient-to-r from-emerald-500/10 to-blue-500/10 dark:from-emerald-500/5 dark:to-blue-500/5">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full flex items-center justify-center">
               <svg
@@ -72,19 +67,14 @@ export default function TutorialBanner() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsExpanded(!isExpanded);
-              }}
+              onClick={() => setBannerExpanded(false)}
               className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
-              aria-label={isExpanded ? 'Réduire' : 'Agrandir'}
+              aria-label="Minimiser le tutoriel"
             >
               <svg
-                className={`w-4 h-4 text-slate-600 dark:text-slate-300 transition-transform ${
-                  isExpanded ? 'rotate-180' : ''
-                }`}
+                className="w-4 h-4 text-slate-600 dark:text-slate-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -98,10 +88,7 @@ export default function TutorialBanner() {
               </svg>
             </button>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                quitTutorial();
-              }}
+              onClick={quitTutorial}
               className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
               aria-label="Quitter le tutoriel"
             >
@@ -124,7 +111,7 @@ export default function TutorialBanner() {
 
         {/* Contenu expandable */}
         <AnimatePresence>
-          {isExpanded && (
+          {isBannerExpanded && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
@@ -207,13 +194,13 @@ export default function TutorialBanner() {
 
       {/* Bulle flottante pour rouvrir le tutoriel quand il est rétracté */}
       <AnimatePresence>
-        {!isExpanded && (
+        {!isBannerExpanded && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            onClick={() => setIsExpanded(true)}
+            onClick={() => setBannerExpanded(true)}
             className="fixed bottom-8 left-4 z-40 w-14 h-14 bg-gradient-to-br from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 rounded-full shadow-2xl flex items-center justify-center md:hidden active:scale-95 transition-transform"
             aria-label="Ouvrir le tutoriel"
           >
