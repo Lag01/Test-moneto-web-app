@@ -31,7 +31,7 @@ export default function TutorialSidebar() {
       {/* En-tête avec icône */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+          <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
             <svg
               className="w-6 h-6 text-white"
               fill="none"
@@ -92,7 +92,7 @@ export default function TutorialSidebar() {
         <div className="space-y-3 mb-6">
           <button
             onClick={handleNext}
-            className="w-full px-6 py-4 bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white rounded-lg text-sm font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center gap-2"
+            className="w-full px-6 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center gap-2"
           >
             {isLastStep ? (
               <>

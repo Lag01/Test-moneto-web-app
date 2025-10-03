@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function PresentationPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-8 md:px-24 pt-8 md:pt-24 pb-4 md:pb-8 bg-gradient-to-br from-emerald-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+    <main className="flex min-h-screen flex-col items-center justify-center px-8 md:px-24 pt-8 md:pt-24 pb-4 md:pb-8 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-5xl w-full">
         {/* En-tête principale */}
         <div className="text-center mb-16">
@@ -28,7 +28,7 @@ export default function PresentationPage() {
 
         {/* Image illustrative / Placeholder */}
         <div className="mb-16 rounded-2xl overflow-hidden shadow-2xl">
-          <div className="bg-gradient-to-br from-emerald-100 to-blue-100 dark:from-slate-800 dark:to-slate-700 p-8 md:py-6 md:px-10 flex items-center justify-center aspect-video md:aspect-[3/1]">
+          <div className="bg-emerald-100 dark:bg-slate-800 p-8 md:py-6 md:px-10 flex items-center justify-center aspect-video md:aspect-[3/1]">
             <div className="grid grid-cols-3 gap-3 md:gap-6 w-full max-w-3xl">
               {/* Simulation visuelle de l'app */}
               <div className="bg-white dark:bg-slate-600 rounded-lg p-3 md:p-8 shadow-lg">
@@ -206,7 +206,7 @@ export default function PresentationPage() {
         <div className="text-center mb-12">
           <Link
             href="/home"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-emerald-600 hover:bg-emerald-700 text-white text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105"
           >
             <span>Tester l&apos;application</span>
             <svg

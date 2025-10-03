@@ -53,7 +53,7 @@ export default function TutorialWelcomeModal({
                   ease: 'easeInOut',
                 }}
               >
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-emerald-400 via-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg">
                   <svg
                     className="w-8 h-8 md:w-10 md:h-10 text-white"
                     fill="none"
@@ -168,7 +168,7 @@ export default function TutorialWelcomeModal({
                 </button>
                 <button
                   onClick={onAccept}
-                  className="flex-1 px-4 md:px-6 py-3 bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all transform hover:scale-105 shadow-lg min-h-[44px] text-sm md:text-base order-1 sm:order-2"
+                  className="flex-1 px-4 md:px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-all transform hover:scale-105 shadow-lg min-h-[44px] text-sm md:text-base order-1 sm:order-2"
                 >
                   Oui, commencer !
                 </button>

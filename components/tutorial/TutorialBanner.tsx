@@ -35,7 +35,7 @@ export default function TutorialBanner() {
         {/* Barre de progression en haut du bandeau */}
         <div className="h-1 bg-slate-200 dark:bg-slate-700">
           <motion.div
-            className="h-full bg-gradient-to-r from-emerald-500 to-blue-500"
+            className="h-full bg-emerald-500"
             initial={{ width: 0 }}
             animate={{ width: `${((currentStepIndex + 1) / totalSteps) * 100}%` }}
             transition={{ duration: 0.3 }}
@@ -43,9 +43,9 @@ export default function TutorialBanner() {
         </div>
 
         {/* En-tête avec titre et bouton de fermeture */}
-        <div className="px-4 py-2 flex items-center justify-between bg-gradient-to-r from-emerald-500/10 to-blue-500/10 dark:from-emerald-500/5 dark:to-blue-500/5">
+        <div className="px-4 py-2 flex items-center justify-between bg-emerald-500/10 dark:bg-emerald-500/5">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full flex items-center justify-center">
+            <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
               <svg
                 className="w-3 h-3 text-white"
                 fill="none"
@@ -147,7 +147,7 @@ export default function TutorialBanner() {
                   </button>
                   <button
                     onClick={handleNext}
-                    className="flex-1 px-4 py-3 bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white rounded-lg text-sm font-medium transition-all min-h-[44px] flex items-center justify-center gap-1"
+                    className="flex-1 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition-all min-h-[44px] flex items-center justify-center gap-1"
                   >
                     {isLastStep ? (
                       <>
@@ -201,7 +201,7 @@ export default function TutorialBanner() {
             exit={{ scale: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
             onClick={() => setBannerExpanded(true)}
-            className="fixed bottom-8 left-4 z-40 w-14 h-14 bg-gradient-to-br from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 rounded-full shadow-2xl flex items-center justify-center md:hidden active:scale-95 transition-transform"
+            className="fixed bottom-8 left-4 z-40 w-14 h-14 bg-emerald-600 hover:bg-emerald-700 rounded-full shadow-2xl flex items-center justify-center md:hidden active:scale-95 transition-transform"
             aria-label="Ouvrir le tutoriel"
           >
             <svg

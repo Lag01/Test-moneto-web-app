@@ -39,7 +39,7 @@ export default function TutorialDisclaimerModal({
             >
               {/* Icône d'information */}
               <div className="flex justify-center mb-4 md:mb-6">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
                   <svg
                     className="w-8 h-8 md:w-10 md:h-10 text-white"
                     fill="none"
@@ -83,7 +83,7 @@ export default function TutorialDisclaimerModal({
               {/* Bouton de confirmation */}
               <button
                 onClick={onContinue}
-                className="w-full px-4 md:px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-medium transition-all transform hover:scale-105 shadow-lg min-h-[44px] text-sm md:text-base"
+                className="w-full px-4 md:px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all transform hover:scale-105 shadow-lg min-h-[44px] text-sm md:text-base"
               >
                 J&apos;ai compris, continuer
               </button>

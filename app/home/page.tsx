@@ -20,7 +20,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-24 bg-gradient-to-br from-emerald-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 md:p-24 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-4xl w-full">
         {/* Notifications */}
         {visibleNotifications.length > 0 && (

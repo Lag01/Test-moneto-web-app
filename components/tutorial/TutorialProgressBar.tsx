@@ -28,7 +28,7 @@ export default function TutorialProgressBar({
       {/* Barre de progression */}
       <div className="relative h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
         <motion.div
-          className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full"
+          className="absolute top-0 left-0 h-full bg-emerald-500 rounded-full"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.5, ease: 'easeOut' }}

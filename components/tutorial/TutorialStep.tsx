@@ -57,7 +57,7 @@ export default function TutorialStep({
         {/* Icône de tutoriel */}
         <div className="flex items-center justify-center mb-6">
           <motion.div
-            className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg"
+            className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg"
             animate={{
               scale: [1, 1.05, 1],
               rotate: [0, 5, -5, 0],
@@ -129,7 +129,7 @@ export default function TutorialStep({
 
           <button
             onClick={onNext}
-            className="px-4 md:px-6 py-3 bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all transform hover:scale-105 min-h-[44px] text-sm md:text-base flex items-center gap-2 shadow-lg"
+            className="px-4 md:px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-all transform hover:scale-105 min-h-[44px] text-sm md:text-base flex items-center gap-2 shadow-lg"
           >
             {isLastStep ? (
               <>
