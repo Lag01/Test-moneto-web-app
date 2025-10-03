@@ -3,6 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TutorialProvider } from "@/context/TutorialContext";
 import TutorialOverlay from "@/components/tutorial/TutorialOverlay";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Moneto - Gestion financière",
@@ -50,6 +52,8 @@ export default function RootLayout({
             <TutorialOverlay />
           </TutorialProvider>
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
