@@ -69,16 +69,16 @@ export default function FixedItemInput({
     }
   };
 
-  const bgColor = type === 'income' ? 'bg-green-50' : 'bg-red-50';
-  const borderColor = type === 'income' ? 'border-green-200' : 'border-red-200';
-  const textColor = type === 'income' ? 'text-green-700' : 'text-red-700';
+  const bgColor = type === 'income' ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20';
+  const borderColor = type === 'income' ? 'border-green-200 dark:border-green-800' : 'border-red-200 dark:border-red-800';
+  const textColor = type === 'income' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400';
 
   const hasError = nameError || amountError;
 
   return (
     <div className="space-y-1">
       <div
-        className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 rounded-lg border ${borderColor} ${bgColor} dark:bg-opacity-20 transition-all duration-200 hover:shadow-md ${
+        className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 rounded-lg border ${borderColor} ${bgColor} transition-all duration-200 hover:shadow-md ${
           hasError ? 'ring-2 ring-red-500' : ''
         }`}
       >

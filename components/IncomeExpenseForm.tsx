@@ -57,17 +57,17 @@ export default function IncomeExpenseForm({ type, items, onChange, title }: Prop
   const themeColors = {
     income: {
       primary: 'emerald',
-      bg: 'bg-emerald-50',
-      text: 'text-emerald-700',
-      border: 'border-emerald-300',
+      bg: 'bg-emerald-50 dark:bg-emerald-900/20',
+      text: 'text-emerald-700 dark:text-emerald-400',
+      border: 'border-emerald-300 dark:border-emerald-800',
       button: 'bg-emerald-600 hover:bg-emerald-700',
       ring: 'focus:ring-emerald-500',
     },
     expense: {
       primary: 'red',
-      bg: 'bg-red-50',
-      text: 'text-red-700',
-      border: 'border-red-300',
+      bg: 'bg-red-50 dark:bg-red-900/20',
+      text: 'text-red-700 dark:text-red-400',
+      border: 'border-red-300 dark:border-red-800',
       button: 'bg-red-600 hover:bg-red-700',
       ring: 'focus:ring-red-500',
     },
