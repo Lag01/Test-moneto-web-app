@@ -15,6 +15,7 @@ import {
 import { useTutorialContext } from '@/context/TutorialContext';
 import { useTutorial } from '@/hooks/useTutorial';
 import TutorialWelcomeModal from '@/components/tutorial/TutorialWelcomeModal';
+import TutorialDisclaimerModal from '@/components/tutorial/TutorialDisclaimerModal';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function DashboardPage() {
   const [showBetaWarning, setShowBetaWarning] = useState(true);
 
   // Tutoriel
-  const { showWelcomeModal, setShowWelcomeModal, startTutorial } = useTutorialContext();
+  const { showWelcomeModal, showDisclaimerModal, setShowWelcomeModal, startTutorial, startTutorialAfterDisclaimer } = useTutorialContext();
   const { initializeTutorial } = useTutorial();
 
   // Afficher la modal de bienvenue si l'utilisateur n'a jamais vu le tutoriel et n'a aucun plan
@@ -67,6 +68,10 @@ export default function DashboardPage() {
   const handleDeclineTutorial = () => {
     updateUserSettings({ hasSeenTutorial: true });
     setShowWelcomeModal(false);
+  };
+
+  const handleContinueFromDisclaimer = () => {
+    startTutorialAfterDisclaimer();
   };
 
   const handleCreateNew = () => {
@@ -183,6 +188,12 @@ export default function DashboardPage() {
         isOpen={showWelcomeModal}
         onAccept={handleAcceptTutorial}
         onDecline={handleDeclineTutorial}
+      />
+
+      {/* Modal de disclaimer du tutoriel */}
+      <TutorialDisclaimerModal
+        isOpen={showDisclaimerModal}
+        onContinue={handleContinueFromDisclaimer}
       />
 
       <div className="p-4 md:p-8">

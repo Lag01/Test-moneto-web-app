@@ -6,10 +6,14 @@ import LayoutWithNav from '@/app/layout-with-nav';
 import SankeyChart from '@/components/SankeyChart';
 import { getPlanSummary } from '@/lib/monthly-plan';
 import { formatCurrency } from '@/lib/financial';
+import { useTutorialContext } from '@/context/TutorialContext';
+import { useTutorial } from '@/hooks/useTutorial';
 
 export default function VisualisationPage() {
   const router = useRouter();
   const { monthlyPlans, currentMonthId, setCurrentMonth } = useAppStore();
+  const { isActive: isTutorialActive } = useTutorialContext();
+  const { finishTutorial } = useTutorial();
 
   const currentPlan = monthlyPlans.find((p) => p.id === currentMonthId);
 
@@ -189,7 +193,13 @@ export default function VisualisationPage() {
               ← Modifier le plan
             </button>
             <button
-              onClick={() => router.push('/dashboard')}
+              onClick={() => {
+                if (isTutorialActive) {
+                  finishTutorial();
+                } else {
+                  router.push('/dashboard');
+                }
+              }}
               className="px-4 md:px-6 py-3 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 min-h-[44px] text-sm md:text-base order-1 sm:order-2"
             >
               Retour au dashboard

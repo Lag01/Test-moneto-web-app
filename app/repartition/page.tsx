@@ -6,11 +6,13 @@ import { useAppStore } from '@/store';
 import LayoutWithNav from '@/app/layout-with-nav';
 import EnvelopeAllocator from '@/components/EnvelopeAllocator';
 import { calculateAvailableAmount, getTotalPercentage } from '@/lib/monthly-plan';
+import { useTutorialContext } from '@/context/TutorialContext';
 
 export default function RepartitionPage() {
   const router = useRouter();
   const { monthlyPlans, currentMonthId, updateMonthlyPlan, normalizeEnvelopesForPlan } =
     useAppStore();
+  const { isActive: isTutorialActive, nextStep } = useTutorialContext();
 
   const currentPlan = monthlyPlans.find((p) => p.id === currentMonthId);
 
@@ -114,7 +116,12 @@ export default function RepartitionPage() {
       return;
     }
 
-    router.push('/visualisation');
+    // Si le tutoriel est actif, faire progresser le tutoriel (qui fera la navigation automatiquement)
+    if (isTutorialActive) {
+      nextStep();
+    } else {
+      router.push('/visualisation');
+    }
   };
 
   return (

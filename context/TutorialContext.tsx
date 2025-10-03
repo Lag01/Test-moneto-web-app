@@ -9,13 +9,16 @@ interface TutorialContextType {
   currentStep: TutorialStepData | null;
   totalSteps: number;
   showWelcomeModal: boolean;
+  showDisclaimerModal: boolean;
   isBannerExpanded: boolean;
   startTutorial: () => void;
+  startTutorialAfterDisclaimer: () => void;
   nextStep: () => void;
   previousStep: () => void;
   skipTutorial: () => void;
   completeTutorial: () => void;
   setShowWelcomeModal: (show: boolean) => void;
+  setShowDisclaimerModal: (show: boolean) => void;
   setBannerExpanded: (expanded: boolean) => void;
 }
 
@@ -25,6 +28,7 @@ export function TutorialProvider({ children }: { children: React.ReactNode }) {
   const [isActive, setIsActive] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [showDisclaimerModal, setShowDisclaimerModal] = useState(false);
   const [isBannerExpanded, setIsBannerExpanded] = useState(true);
 
   const currentStep = isActive && currentStepIndex < tutorialSteps.length
@@ -32,9 +36,14 @@ export function TutorialProvider({ children }: { children: React.ReactNode }) {
     : null;
 
   const startTutorial = useCallback(() => {
+    setShowWelcomeModal(false);
+    setShowDisclaimerModal(true);
+  }, []);
+
+  const startTutorialAfterDisclaimer = useCallback(() => {
+    setShowDisclaimerModal(false);
     setIsActive(true);
     setCurrentStepIndex(0);
-    setShowWelcomeModal(false);
     setIsBannerExpanded(true);
   }, []);
 
@@ -78,13 +87,16 @@ export function TutorialProvider({ children }: { children: React.ReactNode }) {
         currentStep,
         totalSteps: tutorialSteps.length,
         showWelcomeModal,
+        showDisclaimerModal,
         isBannerExpanded,
         startTutorial,
+        startTutorialAfterDisclaimer,
         nextStep,
         previousStep,
         skipTutorial,
         completeTutorial,
         setShowWelcomeModal,
+        setShowDisclaimerModal,
         setBannerExpanded,
       }}
     >

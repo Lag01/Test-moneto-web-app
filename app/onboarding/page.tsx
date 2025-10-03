@@ -6,10 +6,12 @@ import LayoutWithNav from '@/app/layout-with-nav';
 import IncomeExpenseForm from '@/components/IncomeExpenseForm';
 import { formatCurrency } from '@/lib/financial';
 import { calculateAvailableAmount } from '@/lib/monthly-plan';
+import { useTutorialContext } from '@/context/TutorialContext';
 
 export default function OnboardingPage() {
   const router = useRouter();
   const { monthlyPlans, currentMonthId, updateMonthlyPlan } = useAppStore();
+  const { isActive: isTutorialActive, nextStep } = useTutorialContext();
 
   const currentPlan = monthlyPlans.find((p) => p.id === currentMonthId);
 
@@ -66,7 +68,12 @@ export default function OnboardingPage() {
       return;
     }
 
-    router.push('/repartition');
+    // Si le tutoriel est actif, faire progresser le tutoriel (qui fera la navigation automatiquement)
+    if (isTutorialActive) {
+      nextStep();
+    } else {
+      router.push('/repartition');
+    }
   };
 
   return (
